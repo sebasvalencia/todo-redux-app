@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { type } from 'os';
 
 export const AGREGAR_TODO = '[TODO] Agregar todo';
 
