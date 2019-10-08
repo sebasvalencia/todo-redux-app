@@ -16,6 +16,18 @@ export function todoReducer(state = estadoInicial, action: fromTodo.Acciones): T
       const todo = new Todo(action.texto);
       return [...state, todo]; // creo un nuevo todo y ya se clona el state original y se agrega el nuevo todo
 
+    case fromTodo.TOGGLE_TODO:
+      return state.map(todoEdit => {
+        if (todoEdit.id === action.id) {
+          return {
+            ...todoEdit, // clona las propiedades
+            completado: !todoEdit.completado // solo modifica la que yo le diga que quiero cambiar
+          };
+        } else {
+          return todoEdit;
+        }
+      });
+
 
     default: return state;
   }
