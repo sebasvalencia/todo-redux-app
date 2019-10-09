@@ -28,6 +28,18 @@ export function todoReducer(state = estadoInicial, action: fromTodo.Acciones): T
         }
       });
 
+    case fromTodo.EDITAR_TODO:
+        return state.map(todoEdit => {
+          if (todoEdit.id === action.id) {
+            return {
+              ...todoEdit, // clona las propiedades
+              texto: action.texto // solo modifica la que yo le diga que quiero cambiar
+            };
+          } else {
+            return todoEdit;
+          }
+        });
+
 
     default: return state;
   }
