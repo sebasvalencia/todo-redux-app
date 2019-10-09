@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Todo } from '../model/todo.model';
 import { AppState } from 'src/app/app.reducers';
-import { ToggleTodoAction, EditarTodoAction } from '../todo.actions';
+import { ToggleTodoAction, EditarTodoAction, BorrarTodoAction } from '../todo.actions';
 
 @Component({
   selector: 'app-todo-item',
@@ -13,7 +13,7 @@ import { ToggleTodoAction, EditarTodoAction } from '../todo.actions';
 export class TodoItemComponent implements OnInit {
 
   @Input() todo: Todo;
-  @ViewChild('txtInputFisico', {static: false}) txtInputFisico: ElementRef;
+  @ViewChild('txtInputFisico', { static: false }) txtInputFisico: ElementRef;
 
   chkField: FormControl;
   txtInput: FormControl;
@@ -28,7 +28,7 @@ export class TodoItemComponent implements OnInit {
     this.chkField = new FormControl(this.todo.completado);
     this.txtInput = new FormControl(this.todo.texto, Validators.required);
 
-    this.chkField.valueChanges.subscribe( value => {
+    this.chkField.valueChanges.subscribe(value => {
       console.log(value);
       const accion = new ToggleTodoAction(this.todo.id);
       this.store.dispatch(accion);
@@ -57,6 +57,11 @@ export class TodoItemComponent implements OnInit {
     const accion = new EditarTodoAction(this.todo.id, this.txtInput.value);
     this.store.dispatch(accion);
 
+  }
+
+  borrarTodo() {
+    const accion = new BorrarTodoAction(this.todo.id);
+    this.store.dispatch(accion);
   }
 
 }

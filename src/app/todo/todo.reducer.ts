@@ -2,7 +2,7 @@ import * as fromTodo from './todo.actions';
 import { Todo } from './model/todo.model';
 
 
-const todo1 = new Todo('Venver a tanos');
+const todo1 = new Todo('Vencer a tanos');
 const todo2 = new Todo('Salvar al mundo');
 todo2.completado = true;
 
@@ -29,17 +29,19 @@ export function todoReducer(state = estadoInicial, action: fromTodo.Acciones): T
       });
 
     case fromTodo.EDITAR_TODO:
-        return state.map(todoEdit => {
-          if (todoEdit.id === action.id) {
-            return {
-              ...todoEdit, // clona las propiedades
-              texto: action.texto // solo modifica la que yo le diga que quiero cambiar
-            };
-          } else {
-            return todoEdit;
-          }
-        });
+      return state.map(todoEdit => {
+        if (todoEdit.id === action.id) {
+          return {
+            ...todoEdit, // clona las propiedades
+            texto: action.texto // solo modifica la que yo le diga que quiero cambiar
+          };
+        } else {
+          return todoEdit;
+        }
+      });
 
+    case fromTodo.BORRAR_TODO:
+      return state.filter( todoEdit => todoEdit.id !== action.id ); // retorna todo menos menos el action.id
 
     default: return state;
   }
