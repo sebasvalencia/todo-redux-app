@@ -4,10 +4,10 @@ import { NgModule } from '@angular/core';
 // Ngrx
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { todoReducer } from './todo/todo.reducer';
+import { appReducers } from './app.reducers';
 
 // Forms
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,7 +33,7 @@ import { environment } from 'src/environments/environment';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ todos: todoReducer }), // Como va a funcionar la app, mandarle al store nuestro todoReducer
+    StoreModule.forRoot(appReducers), // Como va a funcionar la app, mandarle al store nuestra combinacion de reducers
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
